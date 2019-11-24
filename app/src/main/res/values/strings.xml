@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TouristApp</string>
+    <string name="title_activity_main_page">MainPage</string>
+    <string name="action_settings">Settings</string>
+</resources>
