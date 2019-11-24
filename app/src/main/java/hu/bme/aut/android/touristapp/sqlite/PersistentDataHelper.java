@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.bme.aut.android.touristapp.model.Content;
+import hu.bme.aut.android.touristapp.model.User;
 import hu.bme.aut.android.touristapp.sqlite.table.MainTable;
+import hu.bme.aut.android.touristapp.sqlite.table.UserTable;
 
 public class PersistentDataHelper {
     private SQLiteDatabase database;
@@ -28,6 +30,11 @@ public class PersistentDataHelper {
             MainTable.Columns.isfavorite.name(),
             MainTable.Columns.isvisited.name()
 
+    };
+
+    private String[] userColumns = {
+            UserTable.Columns._id.name(),
+            UserTable.Columns.username.name()
     };
  
     public PersistentDataHelper(final Context context) {
@@ -56,14 +63,6 @@ public class PersistentDataHelper {
         }
     }
 
-        /*_id,
-    username,
-    country,
-    place,
-    description,
-    isfavorite,
-    isvisited*/
-
     public List<Content> restoreContent() {
         final List<Content> contents = new ArrayList<>();
         final Cursor cursor = database.query(MainTable.TABLE_MAIN, mainColumns, null, null, null, null, null);
@@ -90,6 +89,42 @@ public class PersistentDataHelper {
         content.setIsfavorite(cursor.getInt(MainTable.Columns.isfavorite.ordinal()));
         content.setIsvisited(cursor.getInt(MainTable.Columns.isvisited.ordinal()));
         return content;
+    }
+
+
+
+
+
+    public void persistUser(final List<User> users) {
+        clearUser();
+        for (final User item : users) {
+            final ContentValues values = new ContentValues();
+            values.put(UserTable.Columns.username.name(), item.getUsername());
+            database.insert(UserTable.TABLE_USER, null, values);
+        }
+    }
+
+    public List<User> restoreUser() {
+        final List<User> users = new ArrayList<>();
+        final Cursor cursor = database.query(UserTable.TABLE_USER, userColumns, null, null, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            final User user = cursorToUser(cursor);
+            users.add(user);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return users;
+    }
+
+    public void clearUser() {
+        database.delete(UserTable.TABLE_USER, null, null);
+    }
+
+    private User cursorToUser(final Cursor cursor) {
+        final User user= new User();
+        user.setUsername(cursor.getString(UserTable.Columns.username.ordinal()));
+        return user;
     }
 
 }

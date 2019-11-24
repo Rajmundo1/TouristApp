@@ -10,10 +10,10 @@ public class MainTable {
             + Columns._id.name() + " integer primary key autoincrement, "
             + Columns.username.name() + " text not null, "
             + Columns.country.name() + " text not null, "
-            + Columns.place.name() + " text not null"
-            + Columns.description.name() + " text not null, "
+            + Columns.place.name() + " text not null,"
+            + Columns.description.name() + " text, "
             + Columns.isfavorite.name() + " integer not null, "
-            + Columns.isvisited.name() + " integer not null, "
+            + Columns.isvisited.name() + " integer not null "
             + ");";
  
     public static void onCreate(final SQLiteDatabase database) {

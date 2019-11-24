@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import hu.bme.aut.android.touristapp.sqlite.table.MainTable;
+import hu.bme.aut.android.touristapp.sqlite.table.UserTable;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "touristApp.db";
@@ -18,10 +19,12 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(final SQLiteDatabase sqLiteDatabase) {
         MainTable.onCreate(sqLiteDatabase);
+        UserTable.onCreate(sqLiteDatabase);
     }
  
     @Override
     public void onUpgrade(final SQLiteDatabase sqLiteDatabase, final int oldVersion, final int newVersion) {
         MainTable.onUpgrade(sqLiteDatabase, oldVersion, newVersion);
+        UserTable.onUpgrade(sqLiteDatabase, oldVersion, newVersion);
     }
 }
