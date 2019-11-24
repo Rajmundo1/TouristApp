@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/user_row_textView"
+        android:id="@+id/user_row_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Username1"

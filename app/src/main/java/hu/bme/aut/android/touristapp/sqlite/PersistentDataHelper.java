@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.graphics.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,10 @@ import hu.bme.aut.android.touristapp.sqlite.table.MainTable;
 import hu.bme.aut.android.touristapp.sqlite.table.UserTable;
 
 public class PersistentDataHelper {
+
+    private List<Content> contents = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
+
     private SQLiteDatabase database;
  
     private DBHelper dbHelper;
@@ -44,7 +47,15 @@ public class PersistentDataHelper {
     public void open() throws SQLiteException {
         database = dbHelper.getWritableDatabase();
     }
- 
+
+    public List<Content> getContents() {
+        return contents;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
     public void close() {
         dbHelper.close();
     }
@@ -92,9 +103,6 @@ public class PersistentDataHelper {
     }
 
 
-
-
-
     public void persistUser(final List<User> users) {
         clearUser();
         for (final User item : users) {
@@ -105,16 +113,18 @@ public class PersistentDataHelper {
     }
 
     public List<User> restoreUser() {
-        final List<User> users = new ArrayList<>();
+        final List<User> userss = new ArrayList<>();
         final Cursor cursor = database.query(UserTable.TABLE_USER, userColumns, null, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             final User user = cursorToUser(cursor);
-            users.add(user);
+            userss.add(user);
             cursor.moveToNext();
         }
         cursor.close();
-        return users;
+        if(userss.size() != 0)
+            users = userss;
+        return userss;
     }
 
     public void clearUser() {
