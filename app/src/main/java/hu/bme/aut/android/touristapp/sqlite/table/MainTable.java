@@ -14,6 +14,7 @@ public class MainTable {
             + Columns.description.name() + " text, "
             + Columns.isfavorite.name() + " integer not null, "
             + Columns.isvisited.name() + " integer not null "
+            + Columns.desireToVisit.name() + " integer not null "
             + ");";
  
     public static void onCreate(final SQLiteDatabase database) {
@@ -33,6 +34,7 @@ public class MainTable {
         place,
         description,
         isfavorite,
-        isvisited
+        isvisited,
+        desireToVisit
     }
 }

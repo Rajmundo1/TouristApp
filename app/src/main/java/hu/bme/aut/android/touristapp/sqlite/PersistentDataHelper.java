@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,8 @@ public class PersistentDataHelper {
             MainTable.Columns.place.name(),
             MainTable.Columns.description.name(),
             MainTable.Columns.isfavorite.name(),
-            MainTable.Columns.isvisited.name()
+            MainTable.Columns.isvisited.name(),
+            MainTable.Columns.desireToVisit.name()
 
     };
 
@@ -61,7 +63,7 @@ public class PersistentDataHelper {
     }
 
     public void persistContent(final List<Content> contents) {
-        clearContent();
+        clearContents();
         for (final Content item : contents) {
             final ContentValues values = new ContentValues();
             values.put(MainTable.Columns.username.name(), item.getUsername());
@@ -70,6 +72,7 @@ public class PersistentDataHelper {
             values.put(MainTable.Columns.description.name(), item.getDescription());
             values.put(MainTable.Columns.isfavorite.name(), item.isIsfavorite());
             values.put(MainTable.Columns.isvisited.name(), item.isIsvisited());
+            values.put(MainTable.Columns.desireToVisit.name(), item.getDesireToVisit());
             database.insert(MainTable.TABLE_MAIN, null, values);
         }
     }
@@ -87,7 +90,7 @@ public class PersistentDataHelper {
         return contents;
     }
  
-    public void clearContent() {
+    public void clearContents() {
         database.delete(MainTable.TABLE_MAIN, null, null);
     }
 
@@ -99,12 +102,13 @@ public class PersistentDataHelper {
         content.setDescription(cursor.getString(MainTable.Columns.description.ordinal()));
         content.setIsfavorite(cursor.getInt(MainTable.Columns.isfavorite.ordinal()));
         content.setIsvisited(cursor.getInt(MainTable.Columns.isvisited.ordinal()));
+        content.setDesireToVisit(cursor.getInt(MainTable.Columns.desireToVisit.ordinal()));
         return content;
     }
 
 
     public void persistUser(final List<User> users) {
-        clearUser();
+        clearUsers();
         for (final User item : users) {
             final ContentValues values = new ContentValues();
             values.put(UserTable.Columns.username.name(), item.getUsername());
@@ -127,8 +131,28 @@ public class PersistentDataHelper {
         return userss;
     }
 
-    public void clearUser() {
+    public void clearUsers() {
         database.delete(UserTable.TABLE_USER, null, null);
+    }
+
+    public void deleteUser(String username){
+        ArrayList<User> toBeDeletedUser = new ArrayList<>();
+        for(User item: users){
+            if(item.getUsername().equals(username)){
+                toBeDeletedUser.add(item);
+            }
+        }
+        users.removeAll(toBeDeletedUser);
+
+        ArrayList<Content> toBeDeletedContent = new ArrayList<>();
+        for(Content item: contents){
+            if(item.getUsername().equals(username)){
+                toBeDeletedContent.add(item);
+            }
+        }
+        contents.removeAll(toBeDeletedContent);
+
+        persistContent(contents);
     }
 
     private User cursorToUser(final Cursor cursor) {

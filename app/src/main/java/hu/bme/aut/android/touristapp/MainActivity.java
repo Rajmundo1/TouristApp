@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.List;
@@ -68,26 +70,46 @@ public class MainActivity extends AppCompatActivity implements NewUserDialog.Exa
     private void restorePersistedUsers() {
         List<User> list = dataHelper.restoreUser();
         loginLinearLayout.removeAllViews();
-        for (final User item: list) {
+        for (final User item : list) {
             View rowItem = inflater.inflate(R.layout.user_row, null);
 
-            TextView userRowButton = rowItem.findViewById(R.id.user_row_button);
+            final TextView userRowButton = rowItem.findViewById(R.id.user_row_button);
             userRowButton.setText(item.getUsername());
-            userRowButton.setOnClickListener(new View.OnClickListener(){
+            userRowButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     Intent intent;
-                    intent = new Intent(MainActivity.this, MainPage.class);
+                    intent = new Intent(MainActivity.this, MainPageActivity.class);
                     intent.putExtra("username", item.getUsername());
                     startActivity(intent);
-
                 }
             });
-
             loginLinearLayout.addView(rowItem);
 
+            userRowButton.setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+                    final TextView uRB = userRowButton;
+                    PopupMenu popup = new PopupMenu(getApplicationContext(), v);
+                    popup.inflate(R.menu.menu_delete);
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            if (item.getItemId() == R.id.men_delete) {
+                                deleteUserElement(uRB.getText().toString());
+                                return true;
+                            }
+                            return false;
+                        }
+                    });
+                    popup.show();
+                    return true;
+                }
+            });
         }
+
     }
 
     @Override
@@ -104,8 +126,14 @@ public class MainActivity extends AppCompatActivity implements NewUserDialog.Exa
 
 
     @Override
-    public void applyTexts(String username) {
+    public void addUserElement(String username) {
         dataHelper.getUsers().add(new User (username));
+        dataHelper.persistUser(dataHelper.getUsers());
+        restorePersistedUsers();
+    }
+
+    public void deleteUserElement(String username){
+        dataHelper.deleteUser(username);
         dataHelper.persistUser(dataHelper.getUsers());
         restorePersistedUsers();
     }

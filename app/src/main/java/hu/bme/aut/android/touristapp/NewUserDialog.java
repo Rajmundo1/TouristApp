@@ -35,7 +35,7 @@ public class NewUserDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String username = editTextUsername.getText().toString();
-                        listener.applyTexts(username);
+                        listener.addUserElement(username);
                     }
                 });
 
@@ -57,6 +57,6 @@ public class NewUserDialog extends AppCompatDialogFragment {
     }
 
     public interface ExampleDialogListener {
-        void applyTexts(String username);
+        void addUserElement(String username);
     }
 }

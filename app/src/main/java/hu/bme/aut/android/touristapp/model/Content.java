@@ -18,17 +18,21 @@ public class Content {
     private String description;
     private int isfavorite;
     private int isvisited;
+    private int desireToVisit;
+
+
 
     public Content() {
     }
 
-    public Content(String username, String country, String place, String description, int isfavorite, int isvisited) {
+    public Content(String username, String country, String place, String description, int isfavorite, int isvisited, int desireToVisit) {
         this.username = username;
         this.country = country;
         this.place = place;
         this.description = description;
         this.isfavorite = isfavorite;
         this.isvisited = isvisited;
+        this.desireToVisit = desireToVisit;
     }
 
     public String getUsername() {
@@ -77,5 +81,13 @@ public class Content {
 
     public void setIsvisited(int isvisited) {
         this.isvisited = isvisited;
+    }
+
+    public int getDesireToVisit() {
+        return desireToVisit;
+    }
+
+    public void setDesireToVisit(int desireToVisit) {
+        this.desireToVisit = desireToVisit;
     }
 }
