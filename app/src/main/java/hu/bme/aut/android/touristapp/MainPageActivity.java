@@ -103,7 +103,6 @@ public class MainPageActivity extends AppCompatActivity implements NewPlaceDialo
 
         restorePersistedContent();
 
-
     }
 
 
@@ -120,7 +119,6 @@ public class MainPageActivity extends AppCompatActivity implements NewPlaceDialo
 
         adapter.update(new ArrayList<Content>());
 
-        //ALL, VOLTAM_MAR, WANT_TO_GO, FAVORIT
         for (Content item : list) {
             if(item.getUsername().equals(username))
             {
@@ -150,21 +148,6 @@ public class MainPageActivity extends AppCompatActivity implements NewPlaceDialo
             }
 
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        this.finish();
-        super.onBackPressed();
-    }
-
-    @Override
-    protected void onDestroy() {
-        database.open();
-        database.persistUser(database.restoreUser());
-        database.persistContent(database.restoreContent());
-        database.close();
-        super.onDestroy();
     }
 
     @Override
@@ -225,18 +208,6 @@ public class MainPageActivity extends AppCompatActivity implements NewPlaceDialo
 
         restorePersistedContent();
     }
-
-/*    public void addContentElement(String username) {
-        database.getUsers().add(new User(username));
-        database.persistUser(database.getUsers());
-        restorePersistedUsers();
-    }
-
-    public void deleteContentElement(String username) {
-        database.deleteUser(username);
-        database.persistUser(database.getUsers());
-        restorePersistedUsers();
-    }*/
 }
 
 

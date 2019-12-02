@@ -1,6 +1,5 @@
 package hu.bme.aut.android.touristapp.adapter;
 
-import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,14 +25,11 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.MyViewHolder>{
     private final List<Content> contents;
     MainPageActivity activity;
 
-    ItemChangedListener listener;
 
     public RecAdapter(MainPageActivity activity) {
         this.contents = new ArrayList<>();
         this.activity = activity;
     }
-
-
 
     @NonNull
     @Override
@@ -61,11 +57,8 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.MyViewHolder>{
         if(item.getDesireToVisit() == 1) holder.wantToGo.setImageDrawable(holder.Dwanttogo);
         if(item.getDesireToVisit() == 0) holder.wantToGo.setImageDrawable(holder.Dnotwanttogo);
 
-
-
         holder.item = item;
     }
-
 
 
     public void addItem(Content item) {
@@ -79,16 +72,9 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.MyViewHolder>{
         notifyDataSetChanged();
     }
 
-
-
     @Override
     public int getItemCount() {
         return contents.size();
-    }
-
-
-    public interface ItemChangedListener {
-        void ItemChanged(Content item);
     }
 
 
@@ -115,11 +101,6 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.MyViewHolder>{
 
         Content item;
 
-
-
-
-
-        @SuppressLint("ResourceType")
         public MyViewHolder(View v, final MainPageActivity act) {
             super(v);
             circle = v.getResources().getDrawable(R.drawable.ic_check_circle);

@@ -20,7 +20,6 @@
             >
 
             <HorizontalScrollView
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -32,8 +31,8 @@
                         android:id="@+id/tv_user"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="100dp"
-                        android:textSize="30dp"/>
+                        android:layout_marginEnd="100dp"
+                        android:textSize="30sp"/>
 
                     <Button
                         android:id="@+id/btn_all"
@@ -57,7 +56,7 @@
                         android:id="@+id/btn_wanttogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meg szeretném nézni"/>
+                        android:text="@string/meg_szeretn_m_n_zni"/>
 
                 </LinearLayout>
 
@@ -70,7 +69,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main_page_" />
+    <include layout="@layout/content_main_page" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

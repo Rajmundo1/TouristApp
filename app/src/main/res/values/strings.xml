@@ -13,4 +13,9 @@
     <string name="all">All</string>
     <string name="kedvencek">Kedvencek</string>
     <string name="title_activity_main__page_">Tourist App</string>
+    <string name="new_user">New User</string>
+    <string name="existing_users">Existing users:</string>
+    <string name="meg_szeretn_m_n_zni">Meg szeretném nézni</string>
+    <string name="username">Username</string>
+    <string name="username1">Username1</string>
 </resources>
