@@ -13,7 +13,7 @@ public class MainTable {
             + Columns.place.name() + " text not null,"
             + Columns.description.name() + " text, "
             + Columns.isfavorite.name() + " integer not null, "
-            + Columns.isvisited.name() + " integer not null "
+            + Columns.isvisited.name() + " integer not null,"
             + Columns.desireToVisit.name() + " integer not null "
             + ");";
  

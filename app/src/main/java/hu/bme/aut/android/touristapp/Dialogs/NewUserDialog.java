@@ -1,4 +1,4 @@
-package hu.bme.aut.android.touristapp;
+package hu.bme.aut.android.touristapp.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import hu.bme.aut.android.touristapp.R;
 
 
 public class NewUserDialog extends AppCompatDialogFragment {

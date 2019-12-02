@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import hu.bme.aut.android.touristapp.Dialogs.NewUserDialog;
 import hu.bme.aut.android.touristapp.model.User;
 import hu.bme.aut.android.touristapp.sqlite.PersistentDataHelper;
 
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements NewUserDialog.Exa
     protected void onDestroy() {
         dataHelper.open();
         dataHelper.persistUser(dataHelper.restoreUser());
-        dataHelper.persistContent(dataHelper.restoreContent());
         dataHelper.close();
         super.onDestroy();
     }

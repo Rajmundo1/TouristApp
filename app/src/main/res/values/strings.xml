@@ -1,8 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TouristApp</string>
-    <string name="title_activity_main_page">MainPage</string>
     <string name="action_settings">Settings</string>
-    <string name="tab_text_1">All Places</string>
-    <string name="tab_text_2">Favorites</string>
-    <string name="title_activity_aaaaaaasd">aaaaaaasd</string>
+    <string name="favorite">Favorite</string>
+    <string name="description">Description</string>
+    <string name="place">Place</string>
+    <string name="country">Country</string>
+    <string name="visited">Visited</string>
+    <string name="desiretovisit">DesireToVisit</string>
+    <string name="textview">TextView</string>
+    <string name="voltam_m_r">Voltam már</string>
+    <string name="all">All</string>
+    <string name="kedvencek">Kedvencek</string>
+    <string name="title_activity_main__page_">Tourist App</string>
 </resources>

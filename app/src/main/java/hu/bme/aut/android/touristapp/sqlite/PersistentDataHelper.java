@@ -89,7 +89,12 @@ public class PersistentDataHelper {
         cursor.close();
         return contents;
     }
- 
+
+    public void dropAll(){
+        database.execSQL("DROP TABLE IF EXISTS content");
+        database.execSQL("DROP TABLE IF EXISTS user");
+    }
+
     public void clearContents() {
         database.delete(MainTable.TABLE_MAIN, null, null);
     }

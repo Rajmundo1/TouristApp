@@ -1,5 +1,7 @@
 package hu.bme.aut.android.touristapp.model;
 
+import java.util.Objects;
+
 import hu.bme.aut.android.touristapp.sqlite.table.MainTable;
 
 public class Content {
@@ -20,13 +22,48 @@ public class Content {
     private int isvisited;
     private int desireToVisit;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Content)) return false;
+        Content content = (Content) o;
+        return
+                Objects.equals(getUsername(), content.getUsername()) &&
+                Objects.equals(getCountry(), content.getCountry()) &&
+                Objects.equals(getPlace(), content.getPlace()) &&
+                Objects.equals(getDescription(), content.getDescription());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUsername(), getCountry(), getPlace(), getDescription(), isfavorite, isvisited, getDesireToVisit());
+    }
 
     public Content() {
     }
 
+    public Content(Content c){
+        this.username = c.username;
+        this.country = c.country;
+        this.place = c.place;
+        this.description = c.description;
+        this.isfavorite = c.isfavorite;
+        this.isvisited = c.isvisited;
+        this.desireToVisit = c.desireToVisit;
+    }
+
     public Content(String username, String country, String place, String description, int isfavorite, int isvisited, int desireToVisit) {
         this.username = username;
+        this.country = country;
+        this.place = place;
+        this.description = description;
+        this.isfavorite = isfavorite;
+        this.isvisited = isvisited;
+        this.desireToVisit = desireToVisit;
+    }
+
+    public Content(String country, String place, String description, int isfavorite, int isvisited, int desireToVisit) {
+        this.username = null;
         this.country = country;
         this.place = place;
         this.description = description;
